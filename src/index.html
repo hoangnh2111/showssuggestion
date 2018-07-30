@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sugguestion</title>
+</head>
+
+<body>
+    <div id="app1">
+            <h3> Kết quả tìm kiếm</h3>
+        <div class="sugguestion">
+            <div class="card-link">
+                <a href="http://kenh14.vn/thanh-vien-ekip-nong-cung-world-cup-to-tram-anh-la-co-gai-gia-tao-loi-dung-cac-hot-girl-khac-va-pewpew-20180716231405491.chn" data-id="wfzymoenes">Thành viên ekip "Nóng cùng World Cup" tố Trâm Anh là cô gái giả tạo, lợi dụng cả PewPew và hot girl khác</a>
+                <p class="description">Làm đẹp vốn là một trong những công việc tối quan trọng của các chị em. Tất nhiên, trong quá trình chăm sóc da, các nàng không thể tránh khỏi những sai lầm và 14 điều .... </p>
+                <hr>
+            </div>
+            <div class="card-link">
+                <a href="http://kenh14.vn/2-hay-dung-lam-ngay-neu-khong-muon-lan-da-ngay-cang-xuong-sac-20180704110905741.chn" data-id="owo2e2mnvj">14 điều bác sĩ da liễu khuyên bạn hãy dừng làm ngay nếu không muốn làn da </a>
+                <hr>
+            </div>
+            <div class="card-link">
+                <a href="https://a28.cnnd.vn/demo.html" data-id="hfcxsadscs">Một chiếc máy bay quân sự được xác định đã rơi ở quả đồi sát khu vực dân cư của huyện Nghĩa Đàn (Nghệ An)</a>
+                <p class="description">Một chiếc máy bay quân sự được xác định đã rơi ở quả đồi sát khu vực dân cư của huyện Nghĩa Đàn (Nghệ An). </p>
+                <hr>
+            </div>
+            <button class="button addButton" data-id="wfzymoenes" >Open Image Manger 1</button>
+            <button class="button addButton" data-id="owo2e2mnvj" >Open Image Manger 2</button>
+            <button class="button addButton" data-id="hfcxsadscs" >Open Image Manger 3</button>
+        </div>
+        <div id="app"></div> 
+        <script type="text/javascript">
+/** <------------------------ Open Modal and passing data-id attribute--- -------------------------> ***/
+    [].forEach.call(document.getElementsByTagName('button'), function(e){
+        e.addEventListener('click', function(el) {  
+            var data =e.getAttribute("data-id"); 
+            e.setAttribute("data-id",data)                   
+            window.onOpenModal(data);                              
+             });
+         });
+      
+
+ /** <-------------------------- Store url,width and keyStorage ------------------------------> ***/
+    [].forEach.call(document.getElementsByTagName('a'), function(el) {
+                el.addEventListener('click', function(e) {
+                    sessionStorage.setItem('keyStorage',el.getAttribute("data-id"));
+                    sessionStorage.setItem('url', el.href);
+                    const width = el.offsetWidth;
+                    sessionStorage.setItem('sizeWidth', width)
+                });
+            });
+
+
+/** <------------- Check current page with store url and width to fetch data ------------------> ***/     
+    if (
+    sessionStorage.getItem("url") !== null &&
+    sessionStorage.getItem("keyStorage")
+    ) {
+    [].forEach.call(document.getElementsByTagName("a"), function(el) {
+        if (el.href === sessionStorage.getItem("url")) {
+        var node = document.createElement("div");
+        node.setAttribute("id", "slider-content");
+        el.after(node);
+        var allLink = document.getElementsByClassName("card-link");
+        for (var i = 0; i <= allLink.length - 1; i++) {
+            //Check exist
+            if (allLink[i].childElementCount === 4) {
+            //Swap description node vs slider node in class "card-link"
+            allLink[i].insertBefore(
+                allLink[i].childNodes.item(3),
+                allLink[i].childNodes.item(0)
+            );
+            allLink[i].insertBefore(
+                allLink[i].childNodes.item(4),
+                allLink[i].childNodes.item(3)
+            );
+            }
+        }
+        }
+    });
+    }
+        </script>
+</body>
+
+</html>
